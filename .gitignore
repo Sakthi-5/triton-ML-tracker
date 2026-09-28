@@ -1,0 +1,87 @@
+# =========================
+# Python
+# =========================
+
+__pycache__/
+*.py[cod]
+*.pyo
+
+# =========================
+# Virtual Environment
+# =========================
+
+.venv/
+venv/
+env/
+
+# =========================
+# Testing / Coverage
+# =========================
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =========================
+# Jupyter
+# =========================
+
+.ipynb_checkpoints/
+
+# =========================
+# Environment / Secrets
+# =========================
+
+.env
+.env.*
+
+# Keep example environment files
+!.env.example
+
+# =========================
+# ML Data
+# =========================
+
+data/*
+!data/raw/
+!data/raw/.gitkeep
+!data/processed/
+!data/processed/.gitkeep
+
+*.csv
+*.tsv
+*.json
+*.parquet
+
+# =========================
+# ML Models / Artifacts
+# =========================
+
+models/
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.keras
+*.pt
+*.pth
+
+# =========================
+# Logs
+# =========================
+
+*.log
+
+# =========================
+# IDE / Editor
+# =========================
+
+.vscode/
+.idea/
+
+# =========================
+# OS Files
+# =========================
+
+.DS_Store
+Thumbs.db

@@ -1,0 +1,6 @@
+[project]
+name = "triton-ml-tracker"
+version = "0.1.0"
+description = "Reproducible machine learning project environment"
+requires-python = ">=3.14,<3.15"
+dependencies = []
