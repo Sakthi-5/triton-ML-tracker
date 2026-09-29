@@ -1,5 +1,9 @@
+import logging
 import time
 from functools import wraps
+
+
+logger = logging.getLogger(__name__)
 
 
 def timeit(func):
@@ -7,17 +11,22 @@ def timeit(func):
     def wrapper(*args, **kwargs):
         start_time = time.perf_counter()
 
-        result = func(*args, **kwargs)
+        try:
+            return func(*args, **kwargs)
+        finally:
+            elapsed_time = time.perf_counter() - start_time
 
-        end_time = time.perf_counter()
-
-        elapsed_time = end_time - start_time
-
-        print(f"{func.__name__} took {elapsed_time:.6f} seconds")
-
-        return result
+            logger.info(
+                "function completed",
+                extra={
+                    "function": func.__name__,
+                    "duration_seconds": elapsed_time,
+                },
+            )
 
     return wrapper
+
+
 def retry(max_attempts):
     def decorator(func):
         @wraps(func)
@@ -25,9 +34,15 @@ def retry(max_attempts):
             for attempt in range(1, max_attempts + 1):
                 try:
                     return func(*args, **kwargs)
-                except Exception as error:
-                    print(
-                        f"Attempt {attempt} failed: {error}"
+
+                except Exception:
+                    logger.exception(
+                        "function attempt failed",
+                        extra={
+                            "function": func.__name__,
+                            "attempt": attempt,
+                            "max_attempts": max_attempts,
+                        },
                     )
 
                     if attempt == max_attempts:
